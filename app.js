@@ -24,9 +24,6 @@ class MultiSlider {
     {
       option: "transition",
       ending: "s"
-    },
-    {
-      option: "zIndex"
     }
   ]
 
@@ -60,6 +57,12 @@ class MultiSlider {
     // Инициализация главного слайда
     if (!this.options.mainSlide) this.mainSlide = Math.round(this.slides.length / 2);
     else this.mainSlide = this.options.mainSlide;
+
+    for (let i = 0; i < this.slides.length; i++) {
+      this.slides[i].addEventListener("click", () => {
+        this.#move(i);
+      })
+    }  
   }
 
   #move(number) {
