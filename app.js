@@ -1,4 +1,3 @@
-// Utilites || Утилиты
 function shiftArray(array, value = 0) {
   let oldArray = array;
   let newArray = [];
@@ -7,10 +6,10 @@ function shiftArray(array, value = 0) {
 
   for (let i = 0; i < oldArray.length; i++) {    
     if (value < 0 ) {
-      if (value + i < 0) {
-        newArray[oldArray.length + value] = oldArray[i];
+      if ((value % oldArray.length) + i < 0) {
+        newArray[oldArray.length + (value % oldArray.length + i)] = oldArray[i];
       }
-      newArray[(i - value) % oldArray.length] = oldArray[i];
+      else newArray[i + (value % oldArray.length)] = oldArray[i];
     }
     else newArray[(i + value) % oldArray.length] = oldArray[i];
   }
@@ -18,7 +17,6 @@ function shiftArray(array, value = 0) {
   return newArray;
 }
 
-// Functional || Функционал
 class MultiSlider {
   featuresOptions = [
     {
@@ -43,7 +41,7 @@ class MultiSlider {
       if (this.slides[i].nodeName === "IMG") {
         this.baseImages.push(this.slides[i].getAttribute("src"));
       } else {
-        this.baseImages.push(getComputedStyle(this.slides[i]).getPropertyValue("background-image"));
+        this.baseImages.push(getComputedStyle(this.slides[i]).getPropertyValue("background-image").slice(4, -1).replace(/["']/g, ""))
       }
     }
 
@@ -73,7 +71,7 @@ class MultiSlider {
       if (this.slides[j].nodeName === "IMG") {        
         this.slides[j].setAttribute("src", this.baseImages[j]);
       } else {
-        this.slides[j].style.backgroundImage = this.baseImages[number];
+        this.slides[j].style.backgroundImage = `url(${this.baseImages[j]})`;
       }
     }
   }
