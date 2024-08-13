@@ -1,3 +1,4 @@
+// Утилиты | Utilites
 function shiftArray(array, value = 0) {
   let oldArray = array;
   let newArray = [];
@@ -60,7 +61,7 @@ class MultiSlider {
       this.slides[i].addEventListener("click", () => {
         this.#move(i);
       })
-    }  
+    } 
   }
 
   #move(number) {
